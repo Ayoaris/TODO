@@ -16,10 +16,11 @@ const App: FC = () => {
   const [todoList, setTodoList] = useState<ITask[]>([]);
   
 // to handle the change in the input field and set the state of the component
+  
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "task") {
       setTask(e.target.value);
-    
+   
     } else {
       setDeadline(Number(e.target.value));
     }
@@ -27,7 +28,10 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   
 // to add the task to the todoList
   const addTask = () => {
-    
+    if (task === "") {
+      alert("Please enter the task");
+      return;
+    }
 // storing the initial state of the component in newTask
     const newTask = { taskName:task, deadline:deadline };
     setTodoList([...todoList, newTask]); 
@@ -44,18 +48,22 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     <div className="App"> 
       <div className="header">
         <div className="inputContainer ">
-          <input type="text" placeholder="Please add task" className="task" value="task" 
-             onChange={handleChange} />
+          <input type="text" placeholder="Please add task" name="task" value={task} 
+            onChange={handleChange} />
           
           <input
             type="number"
-            placeholder="Deadline (in Days )... "  className="deadline"
-            onChange={handleChange} value="deadline"
+            placeholder="Deadline (in Days )..." name="deadline"
+            value={deadline}
+            onChange={handleChange} 
           />
+
         </div>
-        <button onClick={addTask}>Add Task</button>
+        <button className="add-btn" onClick={addTask}>Add Task</button>
       </div>
+    
       <div className="todoList ">
+  
         {todoList.map((task:ITask, key:number) => { 
           return (
 

@@ -15,7 +15,7 @@ body {
 
 .header {
   flex: 30%;
-  background-color: tomato;
+  background-color: teal;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -34,6 +34,7 @@ body {
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
   padding-left: 10px;
+
   font-size: 17px;
   border: 1px solid grey;
   color:red;
@@ -95,3 +96,5 @@ body {
   color: white;
   cursor: pointer;
 }
+.add-btn{
+  background-color: tomato;}
