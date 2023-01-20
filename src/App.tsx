@@ -19,6 +19,7 @@ const App: FC = () => {
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "task") {
       setTask(e.target.value);
+    
     } else {
       setDeadline(Number(e.target.value));
     }
@@ -35,16 +36,21 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask("");
     setDeadline(0);
   }
+  // to delete the task from the todoList
+  const completedTask = (taskNameToDelete: string) => { 
+     setTodoList(todoList.filter((task) => task.taskName !== taskNameToDelete));  
+  }
   return (
     <div className="App"> 
       <div className="header">
         <div className="inputContainer ">
-          <input type="text" placeholder="Task ... " className="task"
-            value="task" onChange={handleChange} />
+          <input type="text" placeholder="Please add task" className="task" value="task" 
+             onChange={handleChange} />
+          
           <input
             type="number"
-            placeholder="Deadline (in Days ) ... " value="deadline" className="deadline"
-            onChange={handleChange}
+            placeholder="Deadline (in Days )... "  className="deadline"
+            onChange={handleChange} value="deadline"
           />
         </div>
         <button onClick={addTask}>Add Task</button>
@@ -52,7 +58,9 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       <div className="todoList ">
         {todoList.map((task:ITask, key:number) => { 
           return (
-            <TodoTask key={key} task={task} />
+
+  // passing the task and completedTask as props to TodoTask component
+            <TodoTask key={key} task={task} completedTask={completedTask} />
           );
         }
         )}
